@@ -1,50 +1,28 @@
+!pip install intrinio-sdk
+import intrinio_sdk
 from dotenv import load_dotenv
 import json
 import csv
 import os
 import requests
 import datetime
-import yfinance as yf
+from __future__ import print_function
+import time
+import intrinio_sdk as intrinio
+from intrinio_sdk.rest import ApiException
 
-#adapted from https://github.com/ryanbeaudet/Exec-Dashboard-Project/blob/master/monthly_sales.py
-def to_usd(price):
-    return "${0:,.2f}".format(price)
+intrinio.ApiClient().set_api_key('OjMzM2YyMjRkZmIzMTIxZjA3ODgwYTVmNjViZGJiNzM0')
+intrinio.ApiClient().allow_retries(True)
 
+identifier = ''AAPL''
+start_date = ''2018-01-01''
+end_date = ''2019-01-01''
+frequency = 'daily'
+page_size = 100
+next_page = ''~null''
 
-
-def compile_url(ticker):
-    request_url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + str(ticker) + "UZ3B902HD40705HJ" + str(api_key)
-    return request_url
-
-
-#adapted from https://github.com/s2t2/robo-advisor-screencast/blob/v3-testing/app/robo_advisor.py
-def get_response(request_url):
-    #adapted from the screencast
-    response = requests.get(request_url)
-    print(response)
-    parsed_response = json.loads(response.text)
-
-    return parsed_response
-
-
-#adapted from https://github.com/s2t2/robo-advisor-screencast/blob/v3-testing/app/robo_advisor.py
-def transform_response(parsed_response):
-    dates = parsed_response["Time Series (Daily)"]
-
-    rows = []
-
-    for date, daily_prices in dates.items():
-        row = {
-            "timestamp": date,
-            "open": daily_prices["1. open"],
-            "high": daily_prices["2. high"],
-            "low": daily_prices["3. low"],
-            "close": daily_prices["4. close"],
-            "volume": daily_prices["5. volume"]
-        }
-        rows.append(row)
-    
-    return rows
+response = intrinio.SecurityApi().get_security_stock_prices(identifier, start_date=start_date, end_date=end_date, frequency=frequency, page_size=page_size, next_page=next_page)
+print(response)
 
 #adapted from https://github.com/s2t2/robo-advisor-screencast/blob/v3-testing/app/robo_advisor.py
 def write_to_csv(rows, csv_filepath):
