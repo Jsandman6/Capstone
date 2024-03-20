@@ -1,11 +1,5 @@
 !pip install intrinio-sdk
 import intrinio_sdk
-from dotenv import load_dotenv
-import json
-import csv
-import os
-import requests
-import datetime
 from __future__ import print_function
 import time
 import intrinio_sdk as intrinio
