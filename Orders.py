@@ -183,7 +183,7 @@ class Order:
       return False
 
 myPortfolio = Portfolio("VTI TLT IEI GLD DBC", expectedReturn = 0.05, portfolioName = "Moderate", riskBucket = 3)
-myGoal = Goal(name="Vacation", targetYear=2027, targetValue=10000, priority="Dreams", portfolio=myPortfolio)
+myGoal = Goal(name="Vacation", targetYear=2028, targetValue=10000, priority="Dreams", portfolio=myPortfolio)
 myAccount=Account(number="123456789", accountType="Taxable", accountStatus=AccountStatus("APPROVED"), cashBalance=11.0)
 myAccount.goals.append(myGoal)
 
@@ -302,7 +302,7 @@ class MasterOrder:
       split.originalOrder.status = newStatus
 
 myPortfolio2 = Portfolio("VTI TLT IEI GLD DBC", expectedReturn = 0.03, portfolioName = "Conservative", riskBucket = 2)
-myGoal2 = Goal(name="Car", targetYear=2025, targetValue=5000, priority="Dreams", portfolio=myPortfolio2)
+myGoal2 = Goal(name="Car", targetYear=2029, targetValue=5000, priority="Dreams", portfolio=myPortfolio2)
 myAccount2=Account(number="987654321", accountType="Taxable", accountStatus=AccountStatus("APPROVED"), cashBalance=21.0)
 myAccount2.goals.append(myGoal2)
 
